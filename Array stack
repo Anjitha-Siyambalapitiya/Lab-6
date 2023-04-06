@@ -1,0 +1,103 @@
+#include <iostream>
+#include <chrono>
+#include <algorithm>
+using namespace std;
+using namespace std::chrono;
+
+class Stack{
+    public:
+        int len;
+        int top =-1;
+        int arr[];
+        Stack (int len){
+            int arr [len] ;
+        }
+
+        void push(int element){
+            if (!this->isFull()){
+                arr[top +1] = element;
+                top++;
+            }
+            else{
+                cout<<"Stack Overflow. "<< endl;
+            }
+        }
+
+        void pop(){
+            if (!this->isEmpty()){
+                top--;
+            }
+            else{
+                cout<<"stack Underflow"<<endl;
+            }
+        }
+
+        bool isEmpty (){
+            if (top ==-1){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        bool isFull(){
+            if (top == len -1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        int stackTop(){
+            if (this->isEmpty()){
+                cout<<"the stack is empty. "<<endl;
+            }
+            return arr[top];
+        }
+
+        void Display(){
+            for (int i =0 ; i<top+1 ; i++){
+                cout<< arr[i]<< " ";
+            }
+            cout<<"\n";
+        }
+
+
+};
+
+int main(){
+    int len;
+    cout<<"enter the length of stack: "<<endl;
+    auto start = high_resolution_clock::now();
+    cin>> len;
+    Stack stack (len);
+
+    stack.push(8);
+    stack.push(10);
+    stack.push(5);
+    stack.push(11);
+    stack.push(15);
+    stack.push(20);
+    stack.push(9);
+    stack.push(7);
+    stack.push(30);
+    stack.push(4);
+    //display();
+
+    //display();
+    stack.push(9);
+    stack.push(10);
+    stack.push(18);
+    stack.push(42);
+    //display();
+
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<microseconds>(stop - start);
+ 
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
+
+}
