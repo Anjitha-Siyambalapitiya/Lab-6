@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+#include <stdlib.h>
+#define MAX 20
+#include <stdio.h>
+using namespace std;
+using namespace std::chrono;
+
+struct node {
+    int element;
+    struct node* link;
+} *top = NULL;
+
+void push(int element){
+    struct node* newNode;
+    newNode = new node;
+    
+    if (newNode == NULL)
+    {
+        printf("Stack Overflow");
+        exit(1);
+    }
+    newNode->element = element;
+    newNode->link = NULL;
+
+    newNode->link = top;
+    top = newNode;
+}
+int isEmpty(){
+    if (top == NULL)
+    return 1;
+    else 
+    return 0;
+}
+
+int pop(){
+    struct node* current;
+    int val;
+    if(isEmpty){
+        printf("Stack Underflow");
+        exit(1);
+    }
+    current = top;
+    val = current->element;
+    top = top->link;
+    free(current);
+    current = NULL;
+    return val;
+}
+
+void display(){
+    struct node* current;
+    current = top;
+    while (current){
+        printf("%d", current->element);
+        current = current->link;
+    }
+    printf("\n");
+}
+
+int main(){
+    auto start = high_resolution_clock::now();
+
+    push(8);
+    push(10);
+    push(5);
+    push(11);
+    push(15);
+    push(20);
+    push(9);
+    push(7);
+    push(30);
+    push(4);
+    //display();
+
+    //display();
+    push(9);
+    push(10);
+    push(18);
+    push(42);
+    //display();
+
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<microseconds>(stop - start);
+ 
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
+
+}
